@@ -1,0 +1,2 @@
+//Alteração tabela canal
+-Adicionar auto_increment no id_canal

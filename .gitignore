@@ -1,0 +1,71 @@
+# Eclipse
+.metadata
+bin/
+tmp/
+local.properties
+.settings/
+.loadpath
+.recommenders
+.classpath
+.project
+.settings/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Other files
+*.class
+*.tmp
+*.bak
+*.swp
+*~.nib
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# Java annotation processor (APT)
+.factorypath
+
+# sbteclipse plugin
+.target
+
+# Tern plugin
+.tern-project
+
+# Code Recommenders
+.recommenders/
+
+# Maven
+target/
+log/
+
+# OS Files
+.DS_Store
+
+# Package Files 
+*.jar
+*.war
+*.ear
+*.db
+*.zip
+*.tar.gz
+*.tar.bz2
+*.tar
+*.rar
+
+# Windows image file caches
+Thumbs.db 
+  
+# Folder config file
+Desktop.ini
+   
+# Thumbnails
+._*
+
+# Específicas do Projeto
+dist/

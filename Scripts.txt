@@ -1,0 +1,32 @@
+//Scripts FAMILIA
+java -jar projeto-maria-0.0.1-SNAPSHOT.jar carga -i -t FAMILIA "C:\Users\Andre\Desktop\carga_familia_insert.csv"
+java -jar projeto-maria-0.0.1-SNAPSHOT.jar carga -u -t FAMILIA "C:\Users\Andre\Desktop\carga-familia-update.csv"
+java -jar projeto-maria-0.0.1-SNAPSHOT.jar carga -d -t FAMILIA "C:\Users\Andre\Desktop\carga-familia.csv"
+
+//Scripts PRODUTO
+java -jar projeto-maria-0.0.1-SNAPSHOT.jar carga -i -t PRODUTO "C:\Users\Andre\Desktop\carga_produto_insert.csv"
+java -jar projeto-maria-0.0.1-SNAPSHOT.jar carga -u -t PRODUTO "C:\Users\Andre\Desktop\carga-produto-update.csv"
+java -jar projeto-maria-0.0.1-SNAPSHOT.jar carga -d -t PRODUTO "C:\Users\Andre\Desktop\carga-produto.csv"
+
+//Scripts CANAL
+java -jar projeto-maria-0.0.1-SNAPSHOT.jar carga -i -t CANAL "C:\Users\Andre\Desktop\carga_canal_insert.csv"
+java -jar projeto-maria-0.0.1-SNAPSHOT.jar carga -u -t CANAL "C:\Users\Andre\Desktop\carga-canal.csv"
+java -jar projeto-maria-0.0.1-SNAPSHOT.jar carga -d -t CANAL "C:\Users\Andre\Desktop\carga-canal.csv"
+
+//Scripts HISTORICO
+java -jar projeto-maria-0.0.1-SNAPSHOT.jar carga -i -t HISTORICO "C:\Users\Andre\Desktop\carga_historico_insert.csv"
+java -jar projeto-maria-0.0.1-SNAPSHOT.jar carga -u -t HISTORICO "C:\Users\Andre\Desktop\carga-historico.csv"
+java -jar projeto-maria-0.0.1-SNAPSHOT.jar carga -d -t HISTORICO "C:\Users\Andre\Desktop\carga-historico.csv"
+
+//Scripts PHASE
+java -jar projeto-maria-0.0.1-SNAPSHOT.jar carga -i -t PHASE "C:\Users\Andre\Desktop\carga-phase.csv"
+java -jar projeto-maria-0.0.1-SNAPSHOT.jar carga -u -t PHASE "C:\Users\Andre\Desktop\carga-phase.csv"
+java -jar projeto-maria-0.0.1-SNAPSHOT.jar carga -d -t PHASE "C:\Users\Andre\Desktop\carga-phase.csv"
+
+//Scripts Relatório - alterar somente o tipo da carga (canal,familia,produto,historico,phase)
+java -jar projeto-maria-0.0.1-SNAPSHOT.jar relatorio -t PRODUTO "C:\Users\Andre\Desktop\relatorio_produto.csv"
+java -jar projeto-maria-0.0.1-SNAPSHOT.jar relatorio -t PHASE "C:\Users\Andre\Desktop\relatorio_phase.csv"
+
+//Gerar estimativa
+java -jar projeto-maria-0.0.1-SNAPSHOT.jar relatorio -pa 10 -t ESTIMATIVA "C:\Users\Andre\Desktop\previsao.csv"
+java -jar projeto-maria-0.0.1-snapshot.jar relatorio -data 01/01/2003 -data 01/01/2021 -t ESTIMATIVA "C:\Users\Andre\Desktop\previsao.csv"
