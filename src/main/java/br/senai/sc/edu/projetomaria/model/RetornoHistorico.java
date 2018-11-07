@@ -8,7 +8,9 @@ import org.joda.time.DateTime;
 public class RetornoHistorico {
 
 	private List<Double> listaValor = new ArrayList<Double>();
+	private List<Double> listaDemanda = new ArrayList<Double>();
 	private List<DateTime> listaDataSku = new ArrayList<DateTime>();
+	
 	
 	public RetornoHistorico() {
 		super();
@@ -17,6 +19,14 @@ public class RetornoHistorico {
 	public RetornoHistorico(List<Double> listaValor, List<DateTime> listaDataSku) {
 		this.listaValor = listaValor;
 		this.listaDataSku = listaDataSku;
+	}
+
+	public List<Double> getListaDemanda() {
+		return listaDemanda;
+	}
+
+	public void setListaDemanda(List<Double> listaDemanda) {
+		listaDemanda = listaDemanda;
 	}
 
 	public List<Double> getListaValor() {

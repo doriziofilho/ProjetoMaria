@@ -24,6 +24,7 @@ public class Resultado {
 	private List<Double> listaMediaMovel_6;
 	private List<Double> listaSuavizacaoExponencial_6;
 	private List<Double> listaHistorico;
+	private List<Double> listaDemanda;
 	private double eqm_2;
 	private double eqm_4;
 	private double eqm_6;
@@ -47,17 +48,6 @@ public class Resultado {
 		
 	public Resultado() {		
 	}
-
-	/*public Resultado(Integer sku, List<Double> listaMediaMovel, List<Double> listaSuavizacaoExponencial, double eqm,
-			double eqmSV, DateTime dataInicioPrevisao, DateTime dataFinalPrevisao) {
-		super();
-		this.sku = sku;
-		this.listaMediaMovel = listaMediaMovel;
-		this.eqm = eqm;
-		this.eqmSV = eqmSV;
-		this.dataInicioPrevisao = dataInicioPrevisao;
-		this.dataFinalPrevisao = dataFinalPrevisao;
-	}*/
 
 	public List<Double> getListaHistorico() {
 		return listaHistorico;
@@ -122,13 +112,21 @@ public class Resultado {
 	public void setValorAlpha_4(Double valorAlpha_4) {
 		this.valorAlpha_4 = valorAlpha_4;
 	}
-
+	
 	public Double getValorAlpha_6() {
 		return valorAlpha_6;
 	}
 
 	public void setValorAlpha_6(Double valorAlpha_6) {
 		this.valorAlpha_6 = valorAlpha_6;
+	}
+
+	public List<Double> getListaDemanda() {
+		return listaDemanda;
+	}
+
+	public void setListaDemanda(List<Double> listaDemanda) {
+		this.listaDemanda = listaDemanda;
 	}
 
 	public List<Double> getListaMediaMovel_2() {
@@ -305,4 +303,10 @@ public class Resultado {
 	public void setResultadoMedia3(Double resultadoMedia3) {
 		this.resultadoMedia3 = resultadoMedia3;
 	}
+	public void popularListaDemanda() {
+		do {
+			listaDemanda.add(0.0);
+		} while (listaHistorico.size() >= listaDemanda.size());
+	}
+
 }

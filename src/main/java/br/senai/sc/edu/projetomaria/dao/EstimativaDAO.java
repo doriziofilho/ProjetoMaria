@@ -45,15 +45,9 @@ public class EstimativaDAO extends AbstractDAO {
 	public RetornoHistorico listaHistorico(Integer sku, DateTime data1) {
 		String data = fmt.print(data1);
 		String sql;
-		if(data == null) {
-			 sql = "SELECT SUM(QUANTIDADE) FROM HISTORICO WHERE PRODUTO_SKU IN ( SELECT SKU_PHASE_OUT "
-			 		+ "FROM SKU_PHASE WHERE SKU_PHASE_IN = " + sku + ") OR PRODUTO_SKU = " + sku + " "
-			 				+ "GROUP BY MES_ANO ORDER BY MES_ANO ASC;";
-		}else {
 			 sql = "SELECT SUM(QUANTIDADE),MES_ANO FROM HISTORICO WHERE PRODUTO_SKU IN (SELECT SKU_PHASE_OUT "
 			 		+ "FROM SKU_PHASE WHERE SKU_PHASE_IN = " + sku + " ) OR PRODUTO_SKU = " + sku + " AND "
 			 				+ "MES_ANO >= ' " + data + " ' GROUP BY MES_ANO ORDER BY MES_ANO ASC;";
-		}
 		try (Connection conn = getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				ResultSet rs = pstmt.executeQuery();) {
@@ -61,6 +55,7 @@ public class EstimativaDAO extends AbstractDAO {
 			RetornoHistorico listaValor = new RetornoHistorico();
 			
 			List<Double> listaHistorico = new ArrayList<>();
+			List<Double> listaDemanda = new ArrayList<>();
 			List<DateTime> listaSkuData = new ArrayList<>();
 			
 			while (rs.next()) {
@@ -72,10 +67,13 @@ public class EstimativaDAO extends AbstractDAO {
 				skuDataBanco = dt;
 				listaHistorico.add(skuHistorico);
 				listaSkuData.add(skuDataBanco);
+				listaDemanda.add(skuHistorico);
 			}
 			
 			listaValor.setListaValor(listaHistorico);
 			listaValor.setListaDataSku(listaSkuData);
+			listaValor.setListaDemanda(listaDemanda);
+						
 			
 			return listaValor;
 				

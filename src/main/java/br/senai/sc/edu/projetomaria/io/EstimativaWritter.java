@@ -15,6 +15,7 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import Testes_.Grafico;
 import br.senai.sc.edu.projetomaria.model.Resultado;
 import br.senai.sc.edu.projetomaria.resource.Config;
 import br.senai.sc.edu.projetomaria.resource.Messages;
@@ -27,10 +28,10 @@ public class EstimativaWritter {
 
 	private static final String SEPARADORCOLUNAS = "\n";
 	private static final Logger LOGGER = LogManager.getLogger();
-	private static final Object[] colunasArquivo = {"Sku", "mes_ano", "Demanda", "Previsão MM-2", "previsão MM-4", "previsão MM-6",
+	private static final Object[] colunasArquivo = {"Sku", "mes_ano","Historico", "Demanda", "Previsão MM-2", "previsão MM-4", "previsão MM-6",
 													"Suav. Ex. - MM-2", "Suav. Ex. - MM-4", "Suav. Ex. - MM-6" };
-	
-	public void escrever(Path nomeArquivo,  DateTime dataInicial, DateTime dataPrevisao) {
+
+public void escrever(Path nomeArquivo,  DateTime dataInicial, DateTime dataPrevisao) {
 		CSVPrinter csvCompiladorDeArquivos = null;
 
 		CSVFormat formatacaoCsv = CSVFormat.DEFAULT.withRecordSeparator(SEPARADORCOLUNAS).withDelimiter(Config.CSV_DELIMITADOR);
@@ -38,8 +39,6 @@ public class EstimativaWritter {
 		try (FileWriter escritorDeArquivos = new FileWriter(nomeArquivo.toFile())) {
 
 			csvCompiladorDeArquivos = new CSVPrinter(escritorDeArquivos, formatacaoCsv);
-
-			//csvCompiladorDeArquivos.printRecord(colunasArquivo);
 
 			Estimativa estimativa = new Estimativa();
 			List<Resultado> listaResultado = new LinkedList<>();
@@ -62,28 +61,24 @@ public class EstimativaWritter {
 													df.format(resultado.getListaSuavizacaoExponencial_6().get(i))
 													);
 				}
-				csvCompiladorDeArquivos.printRecord(df.format(resultado.getEqm_2()) + "  < -- Erro Quadratico Médio MM 2");
-				csvCompiladorDeArquivos.println();
-				csvCompiladorDeArquivos.printRecord(df.format(resultado.getEqm_4()) + "  < -- Erro Quadratico Médio MM 4");
-				csvCompiladorDeArquivos.println();
-				csvCompiladorDeArquivos.printRecord(df.format(resultado.getEqm_6()) + "  < -- Erro Quadratico Médio MM 6");
-				csvCompiladorDeArquivos.println();
-				csvCompiladorDeArquivos.printRecord(df.format(resultado.getEqmSV_2()) + "  < -- Erro Quadratico Médio Suav. Exp 2");
-				csvCompiladorDeArquivos.println();
-				csvCompiladorDeArquivos.printRecord(df.format(resultado.getEqmSV_4()) + "  < -- Erro Quadratico Médio Suav. Exp 4");
-				csvCompiladorDeArquivos.println();
-				csvCompiladorDeArquivos.printRecord(df.format(resultado.getEqmSV_6()) + "  < -- Erro Quadratico Médio Suav. Exp 6");
-				csvCompiladorDeArquivos.println();
-				csvCompiladorDeArquivos.printRecord(df2.format(resultado.getValorAlpha_2()) + "  < -- Menor Valor de ALPHA para Suav. Exp 2");
-				csvCompiladorDeArquivos.println();
-				csvCompiladorDeArquivos.printRecord(df2.format(resultado.getValorAlpha_4()) + "  < -- Menor Valor de ALPHA para Suav. Exp 4");
-				csvCompiladorDeArquivos.println();
-				csvCompiladorDeArquivos.printRecord(df2.format(resultado.getValorAlpha_6()) + "  < -- Menor Valor de ALPHA para Suav. Exp 6");
-				csvCompiladorDeArquivos.println();
-				csvCompiladorDeArquivos.printRecord(df.format(resultado.getMenorEqm()) + "  < -- Menor Erro Quadratico.");
-				csvCompiladorDeArquivos.println();
+				csvCompiladorDeArquivos.printRecord(resultado.getSKU(),df.format(resultado.getEqm_2()) + "  < -- Erro Quadratico Médio MM 2");
+				csvCompiladorDeArquivos.printRecord(resultado.getSKU(),df.format(resultado.getEqm_4()) + "  < -- Erro Quadratico Médio MM 4");
+				csvCompiladorDeArquivos.printRecord(resultado.getSKU(),df.format(resultado.getEqm_6()) + "  < -- Erro Quadratico Médio MM 6");
+				csvCompiladorDeArquivos.printRecord(resultado.getSKU(),df.format(resultado.getEqmSV_2()) + "  < -- Erro Quadratico Médio Suav. Exp 2");
+				csvCompiladorDeArquivos.printRecord(resultado.getSKU(),df.format(resultado.getEqmSV_4()) + "  < -- Erro Quadratico Médio Suav. Exp 4");
+				csvCompiladorDeArquivos.printRecord(resultado.getSKU(),df.format(resultado.getEqmSV_6()) + "  < -- Erro Quadratico Médio Suav. Exp 6");
+				csvCompiladorDeArquivos.printRecord(resultado.getSKU(),df2.format(resultado.getValorAlpha_2()) + "  < -- Menor Valor de ALPHA para Suav. Exp 2");
+				csvCompiladorDeArquivos.printRecord(resultado.getSKU(),df2.format(resultado.getValorAlpha_4()) + "  < -- Menor Valor de ALPHA para Suav. Exp 4");
+				csvCompiladorDeArquivos.printRecord(resultado.getSKU(),df2.format(resultado.getValorAlpha_6()) + "  < -- Menor Valor de ALPHA para Suav. Exp 6");
+				csvCompiladorDeArquivos.printRecord(resultado.getSKU(),df.format(resultado.getMenorEqm()) + "  < -- Menor Erro Quadratico.");
 				
-							
+				Grafico grafico = new Grafico(resultado.getListaMediaMovel_2(),
+						resultado.getListaMediaMovel_4(),
+						resultado.getListaMediaMovel_6(),
+						resultado.getListaSuavizacaoExponencial_2(),
+						resultado.getListaSuavizacaoExponencial_4(),
+						resultado.getListaSuavizacaoExponencial_6(),
+						dataInicial);
 			}
 			
 			LOGGER.info(Messages.ARQUIVO_CRIADO_COM_SUCESSO);

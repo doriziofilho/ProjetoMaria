@@ -25,36 +25,36 @@ public class Estimativa {
 		
 		for (int i = 0; i < listaSku.size(); i++) {
 			
-			//List<Double> listarHistorico =  dao.listaHistorico(listaSku.get(i), data1);
-			
-			RetornoHistorico retornoLista =  dao.listaHistorico(listaSku.get(i), data1);
+RetornoHistorico retornoLista =  dao.listaHistorico(listaSku.get(i), data1);
 			
 			List<Double> listarHistorico = new ArrayList<>();
 			listarHistorico = retornoLista.getListaValor();
+			List<Double> listaDemanda = new ArrayList<>();
+			listaDemanda = retornoLista.getListaDemanda();
 			DateTime dataIniciop = new DateTime();
 			dataIniciop = retornoLista.getListaDataSku().get(0);
-			
+						
 			CalculoPI media_2 = new CalculoPI(2, listarHistorico, dataIniciop, data2);
 			media_2.calcularMediaMovel();
 			media_2.calcularMenorAlpha();
 			media_2.calcuarSuavizacaoExponencial(media_2.getValorAlpha());
 			media_2.calcularEqmMM();
 			media_2.calcularEqmSV();
-			
+						
 			CalculoPI media_4 = new CalculoPI(4, listarHistorico, dataIniciop, data2);
 			media_4.calcularMediaMovel();
 			media_4.calcularMenorAlpha();
 			media_4.calcuarSuavizacaoExponencial(media_4.getValorAlpha());
 			media_4.calcularEqmMM();
 			media_4.calcularEqmSV();
-			
+						
 			CalculoPI media_6 = new CalculoPI(6, listarHistorico, dataIniciop, data2);
 			media_6.calcularMediaMovel();
 			media_6.calcularMenorAlpha();
 			media_6.calcuarSuavizacaoExponencial(media_6.getValorAlpha());
 			media_6.calcularEqmMM();
 			media_6.calcularEqmSV();
-			
+						
 			List<Double> listaEqm = new ArrayList<>();
 			listaEqm.add(media_2.getEqm());
 			listaEqm.add(media_4.getEqm());
@@ -97,6 +97,8 @@ public class Estimativa {
 			r.setValorAlpha_6(media_6.getValorAlpha());
 			r.setDataResultado(data2);
 			r.setListaHistorico(media_2.getListaHistorico());
+			r.setListaDemanda(listaDemanda);
+			r.popularListaDemanda();
 			r.setMenorEqm(menorEqm);
 			
 			result.add(r);
